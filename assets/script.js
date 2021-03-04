@@ -4,6 +4,12 @@ var uCase = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q'
 var lCase = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 var number = ['1','2','3','4','5','6','7','8','9'];
 var symbol = ['!','@','#','$','%','^','&','*','(',')','+','=','<','>','?','/'];
+var options;
+var pwordlength;
+var pickedNumber;
+var pickedLowerCase;
+var pickedUpperCase;
+var pickedSymbol;
 
 //get character preferences from users
 function getPreferences(){
@@ -39,6 +45,62 @@ function getPreferences(){
      pickedSymbol: pickedSymbol
   };
   return preferences;
+}
+
+//check to see if user didn't choose perferences
+
+if(!pwordlength && !pickedUpperCase && !pickedLowerCase && !pickedNumber && !pickedSymbol){
+  options = alert("you must choose at least one criteria");
+}
+
+//4 options chosen
+else if(pickedUpperCase && pickedLowerCase && pickedNumber && pickedSymbol){
+  options = uCase.concat(lCase, number, symbol);
+}
+//3 options chosen
+else if(pickedUpperCase && pickedLowerCase && pickedNumber){
+  options = uCase.concat(lCase, number);
+}
+else if(pickedUpperCase && pickedNumber && pickedSymbol){
+  options = uCase.concat(number, symbol);
+}
+else if(pickedLowerCase && pickedNumber && pickedSymbol){
+  options = lcase.concat(number, symbol);
+}
+else if(pickedUpperCase && pickedLowerCase && pickedSymbol){
+  options = uCase.concat(lcase, symbol);
+}
+//2 options chosen
+else if(pickedUpperCase && pickedLowerCase){
+  options = uCase.concat(lcase)
+}
+else if(pickedUpperCase && pickedNumber){
+  options = uCase.concat(number);
+}
+else if(pickedUpperCase && pickedSymbol){
+  options = uCase.concat(symbol);
+}
+else if(pickedLowerCase && pickedSymbol){
+  options = lcase.concat(symbol);
+}
+else if(pickedLowerCase && pickedNumber){
+  options = lcase.concat(number);
+}
+else if(pickedSymbol && pickedNumber){
+  options = symbol.concat(number);
+} 
+//1 option chosen
+else if(pickedSymbol){
+  options = symbol;
+}
+else if(pickedUpperCase){
+  options = uCase;
+}
+else if(pickedLowerCase){
+  options = lcase;
+}
+else if(pickedNumber){
+  options = number;
 }
 
 
