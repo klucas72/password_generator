@@ -1,109 +1,56 @@
 // Assigning variables
 var generateBtn = document.querySelector("#generate");
-var uCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-var lCase = "abcdefghijklmnopqrstuvwxyz";
-var number = "0123456789";
-var symbol = "!@#$%^&*(<>?\/)-+;=";
-var pwordlength;
-var pickedUpperCase;
-var pickedLowerCase;
-var pickedNumber;
-var pickedSymbol;
+var uCase = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+var lCase = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+var number = ['1','2','3','4','5','6','7','8','9'];
+var symbol = ['!','@','#','$','%','^','&','*','(',')','+','=','<','>','?','/'];
 
-if (pwordlength < 8 || pwordlength >128){
+//get character preferences from users
+function getPreferences(){
+  // console.log("prefences function");
+  //get password length from user
+  var pwordlength = prompt("how many characters desired?");
+  //check to see if user put in anything other than a number
+  if(isNaN(pwordlength) === true){
+    alert("please enter a number");
+    return;
+  }
+  //password length is valid
+  if (pwordlength < 8 || pwordlength >128){
     alert("password must be between 8 and 128 characters");
-}else{alert ("Please answer the following questions for passwword criteria.")}
+    return;
+  }
+  // console.log(pwordlength);
+  //choose upper case
+  var pickedUpperCase = confirm("do you want upper case letters?");
+  //choose lower case
+  var pickedLowerCase = confirm("do you want lower case letters?");
+  //choose numbers
+  var pickedNumber = confirm("do you want numbers?");
+  //choose symbol
+  var pickedSymbol = confirm("do you want symbols?");
 
-if (pwordlength >= 8 && pwordlength <= 128){
-     alert("Please choose from the following:")
+  //store user preferences in an object
+  var preferences = {
+     pwordlength: pwordlength,
+     pickedUpperCase: pickedUpperCase,
+     pickedLowerCase: pickedLowerCase,
+     pickedNumber: pickedNumber,
+     pickedSymbol: pickedSymbol
+  };
+  return preferences;
 }
 
-function UpperCaseUsed(){
-     pickedUpperCase = prompt("Do you want Upper Case Characters? (yes/no)");
 
-     if(pickedUpperCase === null || pickedUpperCase === ""){
-       alert("please answer yes or no");
-       UpperCaseUsed();
-      }
-     else if(pickedUpperCase === "yes" || pickedUpperCase === "y"){
-      pickedUpperCase = true;
-      return pickedUpperCase;
-     }
-     else if(pickedUpperCase === "no" || pickedUpperCase === "n"){
-       pickedUpperCase = false;
-       return pickedUpperCase;
-     }
-     else{ 
-       alert("Yes or No is required.");
-       UpperCaseUsed();
-     }
-  return pickedUpperCase;
+//define a function to generate a password
+
+function generatePassword(){
+  console.log("inside new function");
+  //get user preferences for password criteria
+  var characterPreferences = getPreferences();
+  console.log(characterPreferences);
 }
 
- function LowerCaseUsed(){
-    pickedLowerCase = prompt("Do you want lower Case Characters? (yes/no)");
-
-    if(pickedLowerCase === null || pickedLowerCase === ""){
-     alert("Please pick yes or no.");
-      LowerCaseUsed();
-    }
-    else if(pickedLowerCase === "yes" || pickedLowerCase === "y"){
-      pickedLowerCase = true;
-      return pickedLowerCase;
-    }
-    else if(pickedLowerCase === "no" || pickedLowerCase === "n"){
-      pickedLowerCase = false;
-      return pickedLowerCase;
-    }
-    else{
-      alert("yes or no is required.");
-      LowerCaseUsed();
-    }
-  return pickedLowerCase;
-}
-
-function numberUsed(){
-  pickedNumber = prompt("Do you want numbers? (yes/no)");
-
-  if (pickedNumber === null || pickedNumber === ""){
-    alert("Please pick yes or no");
-    numberUsed();
-  }
-  else if(pickedNumber === "yes" || pickedNumber === "y"){
-    pickedNumber = true;
-    return pickedNumber;
-  }
-  else if(pickedNumber === "no" || pickedNumber === "n"){
-    pickedNumber = false;
-    return pickedNumber;
-  }
-  else{
-    alert("yes or no is required.");
-    numberUsed();
-  }
-}
-
-function symbolUsed(){
-  pickedSymbol = prompt("Do you want symbols? (yes/no)");
-
-  if(pickedSymbol === null || pickedSymbol === ""){
-    alert("please answer yes or no");
-    symbolUsed();
-  }
-  else if(pickedSymbol === "yes" || pickedSymbol === "y"){
-    pickedSymbol = true;
-    return pickedSymbol;
-  }
-  else if(pickedSymbol === "no" || pickedSymbol === "n"){
-    pickedSymbol = false;
-    return pickedSymbol;
-  }
-  else{
-    alert("yes or no is required.");
-    symbolUsed();
-  }
-  return pickedSymbol;
-}
 
 // Write password to the #password input
 function writePassword() {
