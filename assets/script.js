@@ -51,37 +51,38 @@ function generatePassword(){
   var characterPreferences = getPreferences();
    console.log(characterPreferences);
   //create an empty array to store possible PW characters based on user preferences
-   possibleChar = [];
+   const possibleChar = [];
    //push upper case characters variable into new `possibleChar` variable
    if(characterPreferences.pickedUpperCase === true) {
-     possibleChar.push(uCase)
+     possibleChar.push(...uCase);
    };
    if(characterPreferences.pickedLowerCase === true) {
-     possibleChar.push(lCase)
+     possibleChar.push(...lCase);
    };
    if(characterPreferences.pickedNumber === true) {
-     possibleChar.push(number)
+     possibleChar.push(...number);
    };
    if(characterPreferences.pickedSymbol === true){
-     possibleChar.push(symbol)
+     possibleChar.push(...symbol);
   };
   //create an empty array to store the password as it is being generated
-    password = [];
+    password = " ";
 
-  for (var i = 0; i<pwordlength; i++){
+  for (var i = 0; i<parseInt(characterPreferences.pwordlength); i++){
+    // console.log(parseInt(characterPreferences.pwordlength))
     var randomChar = Math.floor(Math.random() * possibleChar.length);
-    password.push(possibleChar[randomChar]);
+    password = password.concat(possibleChar[randomChar]);
   } 
   return password;
 };
+// var passstring = password.join('')
   
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
+  var passsword = generatePassword();
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-
 }
 
 // Add event listener to generate button
